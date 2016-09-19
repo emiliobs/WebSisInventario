@@ -1,0 +1,80 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="WebSisInventario.Site1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>Sistema de Inventario</title>
+    <link href="Css/Principal.css" rel="stylesheet" />
+     <script src="scripts/jquery-3.1.0.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+   <header class="contentWrapper">
+       <h1><a href="#" id="title">Sistema de Inventario</a></h1>
+       <div id="login">
+           <ul>
+               <li><a href="~/Vistas/Login.aspx"     runat="server"   id="Iniciar">Iniciar Sesión.</a></li>
+               <li><a href="~/Vistas/CerrarSesion.aspx" runat="server" id="Cerrar">Cerrar Sesión.</a></li>
+           </ul>
+       </div>
+   </header>
+    <diV>
+        <asp:ContentPlaceHolder ID="contenido" runat="server">
+
+        </asp:ContentPlaceHolder>
+    </diV>
+    <div class="cotenidoBody">
+        <h3>Funciones del Sistema.</h3>
+        <div id="caja1">
+            <p>Compra de Productos.</p>
+            <asp:Image ImageUrl="~/Images/Compras.png" runat="server" ID="image0" Width="105px" />
+            <p>Compras de Productos realizadas a los proveedores.</p>
+        </div>
+         <div id="caja1">
+            <p>Venta de Productos.</p>
+            <asp:Image ImageUrl="~/Images/Ventas.png" runat="server" ID="image1" Width="105px" />
+            <p>Ventas de Productos que han llevado a cabo los Clintes.</p>
+        </div>
+        <div id="caja1">
+             <p>Bodega de Productos.</p>
+            <asp:Image ImageUrl="~/Images/Bodega.png" runat="server" ID="image2" Width="105px" />
+            <p>Almacenamiento de productos para el Sistema de Inventario.</p>
+        </div>
+        <div id="caja1">
+             <p>Registros de Productos.</p>
+            <asp:Image ImageUrl="~/Images/Registros.png" runat="server" ID="image3" Width="105px" />
+            <p>Registros de Productos almacenados en el Sistema de Inventario.</p>
+        </div>
+    </div>
+    <footer>
+        <div id="footer">
+            <h3>Siguenos en las redes sociales.</h3>
+            <div id="caja2">
+                <a href="https://www.facebook.com/emilio.barrera.10" class="fbk" target="_blank">&nbsp;</a>
+                <p>Hazte fan en nuestra red social.</p>
+            </div>
+            <div id="caja2">
+                 <a href="https://twitter.com/EmilioBarreraS" class="twitter" target="_blank">&nbsp;</a>
+                <p>Siguenos en la red social.</p>
+            </div>
+            <div id="caja2">
+                 <a href="https://plus.google.com/u/0/104332573154279342301" class="google" target="_blank">&nbsp;</a>
+                <p>Agreganos a tu Círculo.</p>
+            </div>
+             <div id="caja2">
+                 <a href="https://www.youtube.com/channel/UClHVioCA72FmdlJXxMBzWyg" class="youtube" target="_blank">&nbsp;</a>
+                <p>Visita nuestro canal.</p>
+            </div>
+        </div>
+        <div class="copy">
+            <p>
+               &copy; <%: DateTime.Now.Year %> Emilio Barrera S.
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
