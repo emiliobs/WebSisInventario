@@ -15,6 +15,54 @@ namespace WebSisInventario.Vistas
             {
                 Response.Redirect("Login.aspx");
             }
+
+            btnActualizar.Visible = false;
+            btnGuardar.Visible = true;
+
+            placeHolderProducto.Visible = true;
+            placeHolderCategoria.Visible = false;
+
+        }
+
+        protected void ButtonTipo_Click(object sender, EventArgs e)
+        {
+            //Condición que evalua si el RadioButton esta selelcionado:
+            if (RadioButtonProducto.Checked)
+            {
+                btnActualizar.Visible = false;
+                btnGuardar.Visible = true;
+
+                placeHolderProducto.Visible = true;
+                placeHolderCategoria.Visible = false;
+
+                txtBuscar.Text = string.Empty;
+                txtCodigo.Text = string.Empty;
+                txtPrecio.Text = string.Empty;
+                txtProducto.Text = string.Empty;
+                LabelMensaje.Text = string.Empty;
+
+            }
+
+            if (RadioButtonCategoria.Checked)
+            {
+                btnActualizar.Visible = false;
+                btnGuardar.Visible = true;
+
+                placeHolderProducto.Visible = false;
+                placeHolderCategoria.Visible = true;
+
+                txtBuscar.Text = string.Empty;
+
+
+                txtCategoria.Text = string.Empty;
+                LabelMensaje.Text = string.Empty;
+
+            }
+        }
+
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("CategoriaProductos.aspx");
         }
     }
 }
