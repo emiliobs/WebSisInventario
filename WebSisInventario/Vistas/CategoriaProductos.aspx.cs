@@ -15,6 +15,7 @@ namespace WebSisInventario.Vistas
         ConnSisInventario db1 = new ConnSisInventario();
         ConnSisInventario db2 = new ConnSisInventario();
         ConnSisInventario db3 = new ConnSisInventario();
+        ConnSisInventario db4 = new ConnSisInventario();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -46,6 +47,11 @@ namespace WebSisInventario.Vistas
             //Condición que evalua si el RadioButton esta selelcionado:
             if (RadioButtonProducto.Checked)
             {
+
+                var campos = "Codigo, Producto, Precio, Categoria";
+                this.GridView1.DataSource = db3.Consultar2(campos, "Productos");
+                this.GridView1.DataBind();
+
                 btnActualizar.Visible = false;
                 btnGuardar.Visible = true;
 
@@ -62,6 +68,11 @@ namespace WebSisInventario.Vistas
 
             if (RadioButtonCategoria.Checked)
             {
+
+                var campos = "Id,Categoria";
+                this.GridView1.DataSource = db4.Consultar2(campos, "Categorias");
+                this.GridView1.DataBind();
+
                 btnActualizar.Visible = false;
                 btnGuardar.Visible = true;
 
@@ -90,7 +101,7 @@ namespace WebSisInventario.Vistas
             //Consicion que evlua si el RadioButton esta seleccionado:
             if (this.RadioButtonProducto.Checked)
             {
-                int codigo = Convert.ToInt32(txtCodigo.Text);
+                var codigo = txtCodigo.Text.TrimStart();
 
                 ////Condicion que verifica que no exista el productos en la bd:
                 var resultado = db3.Consultar3("Codigo", "Productos", "Codigo", codigo);
@@ -132,11 +143,113 @@ namespace WebSisInventario.Vistas
 
             }
 
+
+            if (this.RadioButtonCategoria.Checked)
+            {
+                var categoria = txtCategoria.Text.Trim();
+                //verifica si esxiste la categoria en la bd;
+                var resultado = db1.Consultar3("Categoria","Categorias","Categoria", categoria);
+
+                if (resultado)
+                {
+                    txtCategoria.Focus();
+                    var campos = "Id, Categoria";
+
+                    this.GridView1.DataSource = db4.Consultar2(campos, "Categorias");
+                    this.GridView1.DataBind();
+                    LabelMensaje.Text = "La Categoría " + categoria + "  Ya Existe..... ";
+                }
+                else
+                {
+
+
+                    //Query para insertar los datos a la tabla que esta en la BD:
+                    var sql = "Insert Into Categorias(Categoria) Values ('"+categoria+"')";
+
+                    //Evalua la funcio Insertar:
+                    if (db3.Insertar(sql))
+                    {
+                        txtCategoria.Text = string.Empty;
+                        btnActualizar.Visible = false;
+                        btnGuardar.Visible = true;
+
+                        this.GridView1.DataSource = db1.Consultar2("*","Categorias");
+                        this.GridView1.DataBind();
+
+                        LabelMensaje.Text = "";
+                    }
+                }
+
+
+            }
+
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            this.GuardarDatos();
+
+            if (this.RadioButtonProducto.Checked)
+            {
+                //this.placeHolderProducto.Visible = true;
+                //this.placeHolderCategoria.Visible = false;
+
+
+                //Evalúa los txtBox si estan vacíos;
+                if (string.IsNullOrEmpty(txtCodigo.Text))
+                {
+                    txtCodigo.Focus();
+                    LabelMensaje.Text = "Debe ingresar un Código.....";
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(txtProducto.Text))
+                {
+                    txtProducto.Focus();
+                    LabelMensaje.Text = "Debe ingresar un Producto.....";
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(txtPrecio.Text))
+                {
+                    txtPrecio.Focus();
+                    LabelMensaje.Text = "Debe ingresar un Precio.....";
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(DropDownList.Text))
+                {
+                    DropDownList.Focus();
+                    return;
+                }
+
+                this.GuardarDatos();
+
+            }
+
+            if (this.RadioButtonCategoria.Checked)
+            {
+
+                this.placeHolderProducto.Visible = false;
+                this.placeHolderCategoria.Visible = true;
+
+
+                if (string.IsNullOrWhiteSpace(txtCategoria.Text))
+                {
+                    txtCategoria.Focus();
+                    this.GridView1.DataSource = db1.Consultar2("*", "Categorias");
+                    this.GridView1.DataBind();
+                    LabelMensaje.Text = "Debe ingresar una Categoría.....";
+                    return;
+                }
+
+                    this.GuardarDatos();
+                //LabelMensaje.Text = string.Empty;
+
+
+
+            }
+
+
         }
     }
 }

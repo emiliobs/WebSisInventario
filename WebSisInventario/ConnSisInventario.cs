@@ -103,9 +103,9 @@ namespace WebSisInventario
         }
 
         //Método para buscar registros duplicados:
-        public bool Consultar3 (string campo1, string table, string campo2, int campo3)
+        public bool Consultar3 (string campo1, string table, string campo2, string campo3)
         {
-            string sql = " Select " + campo1 + " From " + table + " Where " + campo1 + " = '" + campo3 +"'";
+            string sql = " Select " + campo1 + " From " + table + " Where " + campo1 + " ='" + campo3 +"'";
 
             con.Open();
 
