@@ -64,7 +64,7 @@
                         <br />
                         <br />
                     </asp:PlaceHolder>
-                    <asp:Button Text="Guardar." ID="btnGuardar" BorderStyle="None" CssClass="button" runat="server" />
+                    <asp:Button Text="Guardar." ID="btnGuardar" BorderStyle="None" CssClass="button" runat="server" OnClick="btnGuardar_Click" />
                      <asp:Button Text="Actualizar." ID="btnActualizar" BorderStyle="None" CssClass="button" runat="server" />
                      <asp:Button Text="Cancelar." ID="btnCancelar" BorderStyle="None" CssClass="button" runat="server" OnClick="btnCancelar_Click" />
                     <br />
